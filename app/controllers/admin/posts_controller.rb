@@ -1,6 +1,6 @@
 class Admin::PostsController < ApplicationController
 	
-	before_action :find_post, only: %i[show edit update destroy]
+	before_action :find_post, only: %i[show edit update destroy ]
 
 	def index
 		@posts = Post.all
@@ -24,9 +24,16 @@ class Admin::PostsController < ApplicationController
 		
 	end
 
+	def update
+		@post.update(post_params)
+		redirect_to admin_posts_path(@post)
+	end
 	
 
-
+	def destroy
+		@post.destroy
+		redirect_to admin_posts_path
+	end
 
 	def find_post
 		@post = Post.find(params[:id])
